@@ -1,0 +1,34 @@
+﻿<TabItem x:Class="Zad5.View.Zamowienia"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Zad5.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Header="Zamowienia" 
+             Style="{DynamicResource TabItemStyle}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{DynamicResource PrimaryYellowColor}"/>
+
+        <DataGrid Grid.Row="1" 
+                  x:Name="dataGrid" 
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=ZamowienieId}"/>
+                <DataGridTextColumn Header="Data Rozpoczecia" Binding="{Binding Path=DataRozpoczecia}"/>
+                <DataGridTextColumn Header="Data Zakonczenia" Binding="{Binding Path=DataZakonczenia}"/>
+                <DataGridTextColumn Header="StatusZamowienia" Binding="{Binding Path=StatusZamowienia}"/>
+                <DataGridTextColumn Header="Klient" Binding="{Binding Path=Klient.Nazwa}"/>
+                <DataGridTextColumn Header="KwotaZamowienia" Binding="{Binding Path=KwotaZamowienia}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</TabItem>

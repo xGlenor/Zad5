@@ -1,0 +1,46 @@
+﻿        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0"
+                Grid.Row="0"
+                BorderThickness="0"
+                Background="#374259">
+
+            <TextBlock Text="SKLEP"
+                       Foreground="White"
+                       FontSize="25"
+                       FontWeight="Bold"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Border>
+
+        <Border Grid.Column="0"
+                Grid.Row="1"
+                BorderThickness="0"
+                Background="#374259">
+
+
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="0"
+                BorderThickness="0"
+                Background="#F2D8D8">
+
+
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                BorderThickness="0"
+                Background="#F2D8D8">
+
+        </Border>

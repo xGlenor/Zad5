@@ -1,0 +1,32 @@
+﻿<Window x:Class="Zad5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zad5" xmlns:View="clr-namespace:Zad5.View"
+        mc:Ignorable="d"
+        Title="Sklep" Height="700" Width="1000"
+        FontFamily="Poppins"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Background="{DynamicResource PrimaryBlueColor}">
+        <Border CornerRadius="20"
+                Background="{DynamicResource PrimaryTextColor}"
+                Padding="10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+
+            <TabControl Height="600" Width="950" Style="{DynamicResource TabControlStyle}" Name="tabControl">
+                <TabItem Header="Strona Główna" Style="{DynamicResource TabItemStyle}">
+                    <Border>
+
+                    </Border>
+                </TabItem>
+            </TabControl>
+
+
+        </Border>
+
+    </Grid>
+</Window>
