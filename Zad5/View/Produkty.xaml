@@ -7,54 +7,67 @@
          mc:Ignorable="d" 
          d:DesignHeight="450" d:DesignWidth="800"
          Style="{DynamicResource TabItemStyle}"
-         Header="Produkty">
+         Header="Produkty"
+         Loaded="Product_Loaded">
+    <TabItem.Resources>
+        <CollectionViewSource x:Key="CategoryViewSource"/>
+        <CollectionViewSource x:Key="ProductViewSource"/>
+    </TabItem.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="300"/>
-            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <!-- DODAWANIE KATEGORII -->
-        <StackPanel Grid.Column="0" Grid.Row="0" Margin="20 10"  HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Margin="0 0 0 10">
             <WrapPanel>
                 <TextBlock
-                    TextAlignment="Center"
-                    Text="Dodaj nowy Produkt"
+                    Text="Dodaj produkt"
                     Foreground="{StaticResource PrimaryBlueColor}"
                     FontSize="20"/>
             </WrapPanel>
-
-            <WrapPanel Margin="0 10">
-                <TextBlock Text="Nazwa: " FontSize="15" Height="30" Width="60"
-                               Foreground="#333333" />
-                <TextBox    Width="150"
-                            TextWrapping="Wrap" 
-                            x:Name="tbox_CategoryName"
-                            Text="{Binding ElementName=listView, Path=SelectedItem.Name}"
-                            Foreground="#333333"
-                            BorderThickness="0 0 0 2"
-                            BorderBrush="{StaticResource PrimaryBlueColor}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <!-- NAZWA PRODUKTU -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Nazwa: " FontSize="15" Height="30" Width="60" Foreground="#333333" />
+                <TextBox Width="150"
+                         TextWrapping="Wrap" 
+                         x:Name="tbox_ProductName"
+                         Foreground="#333333"
+                         BorderThickness="0 0 0 2"
+                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
             </WrapPanel>
-
-            <WrapPanel Margin="0 10">
-                <TextBlock Text="Ilosc na Stanie: " FontSize="15" Height="30" Width="60"
-                               Foreground="#333333" />
-                <TextBox    Width="150"
-                            TextWrapping="Wrap" 
-                            x:Name="tbox_CategoryName11"
-                            Text="{Binding ElementName=listView, Path=SelectedItem.Name}"
-                            Foreground="#333333"
-                            BorderThickness="0 0 0 2"
-                            BorderBrush="{StaticResource PrimaryBlueColor}"/>
+            <!-- STAN MAGAZYNOWY -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Ilosć: " FontSize="15" Height="30" Width="45" Foreground="#333333" />
+                <TextBox Width="70"
+                         TextWrapping="Wrap" 
+                         x:Name="tbox_ProductIlosc"
+                         Foreground="#333333"
+                         BorderThickness="0 0 0 2"
+                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
             </WrapPanel>
-
-            <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+            <!-- Kategoria -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Kategoria: " FontSize="15" Height="30" Width="80" Foreground="#333333" />
+                <ComboBox x:Name="combo" ItemsSource="{Binding Source={StaticResource CategoryViewSource}}" DisplayMemberPath="Name" SelectedIndex="0"
+                          Foreground="{StaticResource PrimaryBlueColor}" BorderBrush="Transparent"/>
+            </WrapPanel>
+            <!-- CenaJednostkowa -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Cena Jednostkowa: " FontSize="15" Height="30" Width="150" Foreground="#333333" />
+                <TextBox Width="100"
+                         TextWrapping="Wrap" 
+                         x:Name="tbox_ProductCena"
+                         Foreground="#333333"
+                         BorderThickness="0 0 0 2"
+                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
+            </WrapPanel>
+            <WrapPanel Margin="20 0 0 0">
                 <Button Width="100"
                             Height="40"
                             Content="DODAJ"
@@ -73,63 +86,69 @@
             </WrapPanel>
         </StackPanel>
 
-        <!-- MODYFIKOWANIE I USUWANIE KATEGORII -->
-        <StackPanel TextBlock.FontSize="15" Grid.Column="1" Grid.Row="0" Margin="20 10">
+
+        <StackPanel Grid.Row="2" Margin="0 10 0 10">
             <WrapPanel>
                 <TextBlock
-                    Text="Edytuj Kategorię:"
+                    Text="Edytuj Kategorię"
                     Foreground="{StaticResource PrimaryBlueColor}"
                     FontSize="20"/>
             </WrapPanel>
-            <WrapPanel Margin="0 10">
-                <TextBlock Text="ID: " Height="30" Width="60"
-                               Foreground="#333333"/>
-                <TextBlock x:Name="tbox_CategoryID" Height="30"
-                           Text="{Binding ElementName=listView, Path=SelectedItem.ProduktKategoriaId}"
-                               Foreground="#333333">
-                </TextBlock>
-
-            </WrapPanel>
-            <WrapPanel Margin="0 10">
-                <TextBlock Text="Nazwa: " Height="30" Width="60"
-                               Foreground="#333333" />
-                <TextBox    Width="150"
-                            TextWrapping="Wrap" 
-                            x:Name="tbox_CategoryName1"
-                            Text="{Binding ElementName=listView, Path=SelectedItem.Name}"
-                            Foreground="#333333"
-                            BorderThickness="0 0 0 2"
-                            BorderBrush="{StaticResource PrimaryBlueColor}"/>
-            </WrapPanel>
         </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="0" Margin="20 10"  HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <WrapPanel>
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <!-- NAZWA PRODUKTU -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Nazwa: " FontSize="15" Height="30" Width="60" Foreground="#333333" />
+                <TextBox Width="150"
+                         TextWrapping="Wrap" 
+                         x:Name="tbox_ProductName1"
+                         Text="{Binding ElementName=listView, Path=SelectedItem.Nazwa}"
+                         Foreground="#333333"
+                         BorderThickness="0 0 0 2"
+                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
+            </WrapPanel>
+            <!-- STAN MAGAZYNOWY -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Ilosć: " FontSize="15" Height="30" Width="45" Foreground="#333333" />
+                <TextBox Width="70"
+                         TextWrapping="Wrap" 
+                         x:Name="tbox_ProductIlosc1"
+                         Text="{Binding ElementName=listView, Path=SelectedItem.IloscNaStanie}"
+                         Foreground="#333333"
+                         BorderThickness="0 0 0 2"
+                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
+            </WrapPanel>
+            <!-- Kategoria -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Kategoria: " FontSize="15" Height="30" Width="80" Foreground="#333333" />
+                <ComboBox ItemsSource="{Binding Source={StaticResource CategoryViewSource}}" 
+                          DisplayMemberPath="Name" 
+                          SelectedItem="{Binding ElementName=listView, Path=SelectedItem.ProduktKategoria}"
+                          Foreground="{StaticResource PrimaryBlueColor}" 
+                          BorderBrush="Transparent"
+                          x:Name="cbox_ProductCategory"/>
+            </WrapPanel>
+            <!-- CenaJednostkowa -->
+            <WrapPanel Margin="5 0">
+                <TextBlock Text="Cena Jednostkowa: " FontSize="15" Height="30" Width="150" Foreground="#333333" />
+                <TextBox Width="100"
+                         TextWrapping="Wrap" 
+                         x:Name="tbox_ProductCena1"
+                         Foreground="#333333"
+                         BorderThickness="0 0 0 2"
+                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
+            </WrapPanel>
+            <WrapPanel Margin="20 0 0 0">
                 <Button Width="100"
-                        Height="40"
-                        x:Name="btn_CategoryEdit"
-                        Content="EDYTUJ"
-                        Background="{StaticResource PrimaryBlueColor}"
-                        Foreground="{StaticResource PrimaryTextColor}"
-                        FontWeight="Bold"
-                        FontSize="15"
-                            
-                        BorderThickness="0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="20"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Button Width="100"
-                        Height="40"
-                        x:Name="btn_CategoryDelete"
-                        Content="USUŃ"
-                        Background="{StaticResource PrimaryBlueColor}"
-                        Foreground="{StaticResource PrimaryTextColor}"
-                        FontWeight="Bold"
-                        FontSize="15"
-                        BorderThickness="0">
+                            Height="40"
+                            Content="USUŃ"
+                            Background="{StaticResource PrimaryBlueColor}"
+                            Foreground="{StaticResource PrimaryTextColor}"
+                            FontWeight="Bold"
+                            FontSize="15"
+                            BorderThickness="0"
+                            >
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="20"/>
@@ -139,7 +158,8 @@
             </WrapPanel>
         </StackPanel>
         
-        <ListView Grid.Row="1" Grid.ColumnSpan="3" x:Name="listView" Foreground="#333333">
+        <ListView Grid.Row="5" x:Name="listView" Foreground="#333333"
+                  ItemsSource="{Binding Source={StaticResource ProductViewSource}}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ProduktId}" Width="50"/>

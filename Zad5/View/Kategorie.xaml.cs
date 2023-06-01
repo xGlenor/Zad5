@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zad5.Core;
 using Zad5.Model;
-using Zad5.ViewModel;
+
 
 namespace Zad5.View
 {
@@ -25,21 +26,46 @@ namespace Zad5.View
 	public partial class Kategorie : TabItem
 	{
 		private readonly SklepContext sklepContext;
+
+		private CollectionViewSource CategoryViewSource;
 		public Kategorie()
 		{
 			InitializeComponent();
 
 			sklepContext = App.GetShopContext();
 
-			//listView.ItemsSource = sklepContext.KategoriaProduktu.ToList();
+			CategoryViewSource = (CollectionViewSource)FindResource(nameof(CategoryViewSource));
 
-			DataContext = new KategorieViewModel();
 
 		}
 
+		private void Category_Loaded(object sender, RoutedEventArgs e)
+		{
+			sklepContext.KategoriaProduktu.Load();
+			CategoryViewSource.Source = sklepContext.KategoriaProduktu.Local.ToObservableCollection();
+		}
+
+		private void btn_CategorySave_Click(object sender, RoutedEventArgs e)
+		{
+			sklepContext.SaveChanges();
+		}
 		private void btnAddCategory_Click(object sender, RoutedEventArgs e)
 		{
+			if (tbox_AddCategory.Text != string.Empty)
+			{
+				sklepContext.KategoriaProduktu.Add(new ProduktKategoria() { Name = tbox_AddCategory.Text });
+				tbox_AddCategory.Text = string.Empty;
 
+				sklepContext.SaveChanges();
+				listView.Items.Refresh();
+			}
+		}
+
+		private void btn_CategoryDelete_Click(object sender, RoutedEventArgs e)
+		{
+			sklepContext.Remove(sklepContext.KategoriaProduktu.Single(kp => kp.ProduktKategoriaId == int.Parse(tbox_CategoryID.Text)));
+			sklepContext.SaveChanges();
+			listView.Items.Refresh();
 		}
 	}
 }
