@@ -28,11 +28,12 @@ namespace Zad5.Model
 		{
 		}
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		/*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 			=> optionsBuilder.UseSqlServer(@"Data Source=GRZES; Initial Catalog = ShopDatabase; Integrated Security=True;Encrypt=False;TrustServerCertificate=False;");
+		*/
 
-		/*		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-					=> optionsBuilder.UseInMemoryDatabase("@Sklep");*/
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+			=> optionsBuilder.UseInMemoryDatabase("@Sklep");
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

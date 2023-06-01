@@ -47,4 +47,5 @@ namespace Zad5.View
 			CategoryViewSource.Source = sklepContext.KategoriaProduktu.Local.ToObservableCollection();
 		}
 	}
+
 }
