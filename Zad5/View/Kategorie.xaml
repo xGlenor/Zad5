@@ -137,18 +137,20 @@
             </WrapPanel>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.ColumnSpan="3" 
+        <ListBox Grid.Row="1" Grid.ColumnSpan="3" 
                   ItemsSource="{Binding Source={StaticResource CategoryViewSource}}"
                   x:Name="listView" 
-                  Foreground="#333333">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ProduktKategoriaId}" Width="50"/>
-                    <GridViewColumn Header="Kategoria" DisplayMemberBinding="{Binding Path=Name}" Width="200"/>
-                </GridView>
-            </ListView.View>
-            
-        </ListView>
+                  Foreground="#333333"
+                  ItemTemplate="{StaticResource CategoryTemplate}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Margin="0 0 0 0"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
 
     </Grid>
 </TabItem>

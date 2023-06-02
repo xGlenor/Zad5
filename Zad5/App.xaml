@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Theme/TabControl.xaml"/>
                 <ResourceDictionary Source="Theme/TabItemStyle.xaml"/>
                 <ResourceDictionary Source="Theme/Colors.xaml"/>
+                <ResourceDictionary Source="Theme/DataTemplates.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
