@@ -54,7 +54,7 @@
             <!-- Kategoria -->
             <WrapPanel Margin="5 0">
                 <TextBlock Text="Kategoria: " FontSize="15" Height="30" Width="80" Foreground="#333333" />
-                <ComboBox x:Name="combo" ItemsSource="{Binding Source={StaticResource CategoryViewSource}}" DisplayMemberPath="Name" SelectedIndex="0"
+                <ComboBox x:Name="combo" ItemsSource="{Binding Source={StaticResource CategoryViewSource},Mode=OneWay}" DisplayMemberPath="Name" SelectedIndex="0"
                           Foreground="{StaticResource PrimaryBlueColor}" BorderBrush="Transparent"/>
             </WrapPanel>
             <!-- CenaJednostkowa -->

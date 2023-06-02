@@ -12,6 +12,21 @@
              Loaded="Category_Loaded">
     <TabItem.Resources>
         <CollectionViewSource x:Key="CategoryViewSource"/>
+
+        <DataTemplate x:Key="CategoryProducts" DataType="CategoryViewSource">
+            <StackPanel Orientation="Horizontal">​
+
+                <Label>Hello</Label>
+
+                <TextBox Text="{Binding Path= ProduktKategoriaId, Mode=TwoWay}"
+                         Width="80"
+                         Margin="3 5 3 5"/>
+                <TextBlock Text="{Binding Path= Name, Mode=OneWay}" 
+                           Margin="0 5 3 5"/>
+
+            </StackPanel>
+        </DataTemplate>
+        
     </TabItem.Resources>
     <Grid Name="GridMain">
                 
@@ -137,6 +152,7 @@
             </WrapPanel>
         </StackPanel>
 
+<<<<<<< HEAD
         <ListBox Grid.Row="1" Grid.ColumnSpan="3" 
                   ItemsSource="{Binding Source={StaticResource CategoryViewSource}}"
                   x:Name="listView" 
@@ -152,5 +168,11 @@
             </ListBox.ItemsPanel>
         </ListBox>
 
+=======
+        <ListBox x:Name="listView"
+            Grid.Row="1" Grid.ColumnSpan="3"
+            ItemsSource = "{Binding CategoryViewSource}" 
+            ItemTemplate = "{StaticResource CategoryProducts}"/>
+>>>>>>> a5811d1e4668b619e99e4367a785a4c8d7a26eea
     </Grid>
 </TabItem>
