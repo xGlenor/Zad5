@@ -4,7 +4,7 @@
     <DataTemplate x:Key="CategoryTemplate">
         <StackPanel Orientation="Vertical">
             <Border Padding="10 10"
-                    Width="150" 
+                    MinWidth="150"
                     BorderBrush="{StaticResource BackgroundColor}"
                     BorderThickness="1">
                 <Grid>
@@ -16,12 +16,51 @@
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:"/>
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:" Width="70"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=ProduktKategoriaId}"/>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Kategoria:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Kategoria:" Width="70"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name}"/>
+
+                </Grid>
+            </Border>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ProductTemplate">
+        <StackPanel Orientation="Vertical">
+            <Border Padding="10 10"
+                    MinWidth="150"
+                    BorderBrush="{StaticResource BackgroundColor}"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:" Width="70"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=ProduktId}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Nazwa:" Width="70"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Nazwa}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Kategoria:" Width="70"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=ProduktKategoria.Name}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Cena:" Width="70"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=CenaJednostkowa}"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Ilość:" Width="70"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=IloscNaStanie}"/>
 
                 </Grid>
             </Border>

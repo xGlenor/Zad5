@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,8 +27,8 @@ namespace Zad5.View
 	{
 		private readonly SklepContext sklepContext;
 
-		private CollectionViewSource ProductViewSource;
-		private CollectionViewSource CategoryViewSource;
+		private CollectionViewSource ProductSource;
+		private CollectionViewSource CategoryListSource;
 
 		public Produkty()
 		{
@@ -34,8 +36,8 @@ namespace Zad5.View
 
 			sklepContext = App.GetShopContext();
 
-			ProductViewSource = (CollectionViewSource)FindResource(nameof(ProductViewSource));
-			CategoryViewSource = (CollectionViewSource)FindResource(nameof(CategoryViewSource));
+			ProductSource = (CollectionViewSource)FindResource(nameof(ProductSource));
+			CategoryListSource = (CollectionViewSource)FindResource(nameof(CategoryListSource));
 
 		}
 		private void Product_Loaded(object sender, RoutedEventArgs e)
@@ -43,9 +45,33 @@ namespace Zad5.View
 			sklepContext.KategoriaProduktu.Load();
 			sklepContext.Produkty.Load();
 
-			ProductViewSource.Source = sklepContext.Produkty.Local.ToObservableCollection();
-			CategoryViewSource.Source = sklepContext.KategoriaProduktu.Local.ToObservableCollection();
+			ProductSource.Source = sklepContext.Produkty.Local.ToObservableCollection();
+			CategoryListSource.Source = sklepContext.KategoriaProduktu.Select(c => c.Name).ToList();
+		}
+
+		private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+		{
+
+			sklepContext.Produkty.Add(new Produkt()
+			{
+				Nazwa = tbox_ProductName.Text,
+				KategoriaProduktuId = sklepContext.KategoriaProduktu.Single(
+					c => c.Name.Equals((string) combo_ProductCategory.SelectedValue)).ProduktKategoriaId,
+				IloscNaStanie = int.Parse(tbox_ProductIlosc.Text),
+				CenaJednostkowa = double.Parse(tbox_ProductCena.Text)
+			});
+
+			sklepContext.SaveChanges();
+			listView.Items.Refresh();
+		}
+	
+		private void btn_ProductDelete_Click(object sender, RoutedEventArgs e)
+		{
+			sklepContext.Remove(sklepContext.Produkty.Single(p => p.ProduktId == int.Parse(tbox_EditProductID.Text)));
+			sklepContext.SaveChanges();
+			listView.Items.Refresh();
 		}
 	}
+
 
 }
