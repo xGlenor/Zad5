@@ -7,28 +7,121 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Header="Zamowienia" 
+             Loaded="Order_Loaded"
              Style="{DynamicResource TabItemStyle}">
-
+    <TabItem.Resources>
+        <CollectionViewSource x:Key="ClientsSource"/>
+        <CollectionViewSource x:Key="OrderSource"/>
+    </TabItem.Resources>
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="150"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="{DynamicResource PrimaryYellowColor}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Row="1" 
-                  x:Name="dataGrid" 
-                  AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=ZamowienieId}"/>
-                <DataGridTextColumn Header="Data Rozpoczecia" Binding="{Binding Path=DataRozpoczecia}"/>
-                <DataGridTextColumn Header="Data Zakonczenia" Binding="{Binding Path=DataZakonczenia}"/>
-                <DataGridTextColumn Header="StatusZamowienia" Binding="{Binding Path=StatusZamowienia}"/>
-                <DataGridTextColumn Header="Klient" Binding="{Binding Path=Klient.Nazwa}"/>
-                <DataGridTextColumn Header="KwotaZamowienia" Binding="{Binding Path=KwotaZamowienia}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- DODAWANIE ZAMÓWIENIA -->
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="20 10"  HorizontalAlignment="Center">
+            <WrapPanel>
+                <TextBlock Grid.Row="0" 
+                    TextAlignment="Center"
+                    Text="Dodaj nowe Zamówienie"
+                    Foreground="{StaticResource PrimaryBlueColor}"
+                    FontSize="20"/>
+            </WrapPanel>
 
+            <WrapPanel TextBlock.FontSize="15" Grid.Row="1" Margin="0 10">
+                <ComboBox Name="cbox_AddOrdder"
+                          ItemsSource="{Binding Source={StaticResource ClientsSource}}"
+                          DisplayMemberPath="Nazwa"
+                          IsReadOnly="True"
+                          Width="230"/>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+                <Button MinWidth="200"
+                            Height="40"
+                            Content="DODAJ ZAMÓWIENIE"
+                            Background="{StaticResource PrimaryBlueColor}"
+                            Foreground="{StaticResource PrimaryTextColor}"
+                            FontWeight="Bold"
+                            FontSize="15"
+                            BorderThickness="0"
+                            Click="btnAddOrder_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel TextBlock.FontSize="15" Grid.Column="1" Grid.Row="0" Margin="20 10">
+            <WrapPanel>
+                <TextBlock
+                    Text="Edytuj Zamówienie:"
+                    Foreground="{StaticResource PrimaryBlueColor}"
+                    FontSize="20"/>
+            </WrapPanel>
+            <WrapPanel Margin="0 10">
+                <TextBlock Text="ID: " Height="30" Width="60"
+                               Foreground="#333333"/>
+                <TextBlock x:Name="tbox_OrderID" Height="30"
+                           Text="{Binding ElementName=listView, Path=SelectedItem.ZamowienieId}"
+                            Foreground="#333333">
+                </TextBlock>
+
+            </WrapPanel>
+            <WrapPanel Margin="0 10">
+                <TextBlock Text="Nazwa: " Height="30" Width="60"
+                               Foreground="#333333" />
+                <TextBox    Width="150"
+                            TextWrapping="Wrap" 
+                            x:Name="tbox_OrderStatus"
+                            Text="{Binding ElementName=listView, Path=SelectedItem.StatusZamowienia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#333333"
+                            BorderThickness="0 0 0 2"
+                            LostFocus="btn_OrderSave_LostFocus"
+                            BorderBrush="{StaticResource PrimaryBlueColor}"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel TextBlock.FontSize="15" Grid.Column="2" Grid.Row="0" Margin="20 10">
+            <WrapPanel Margin="0 10">
+                <TextBlock Text="KlientId: " Height="30" Width="70"
+                               Foreground="#333333" />
+                <TextBox    Width="150"
+                            TextWrapping="Wrap" 
+                            x:Name="tbox_OrderStatuss"
+                            Text="{Binding ElementName=listView, Path=SelectedItem.Klient.Nazwa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#333333"
+                            BorderThickness="0 0 0 2"
+                            LostFocus="btn_OrderSave_LostFocus"
+                            BorderBrush="{StaticResource PrimaryBlueColor}"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <ListBox Grid.Row="1"
+                  ItemsSource="{Binding Source={StaticResource OrderSource}}"
+                  x:Name="listView" 
+                  Foreground="#333333"
+                  ItemTemplate="{StaticResource OrderTemplate}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  Grid.ColumnSpan="3"
+                  >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Margin="0 0 0 0"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </TabItem>

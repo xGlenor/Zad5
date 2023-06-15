@@ -35,8 +35,6 @@ namespace Zad5.View
 			sklepContext = App.GetShopContext();
 
 			CategoryViewSource = (CollectionViewSource)FindResource(nameof(CategoryViewSource));
-
-
 		}
 
 		private void Category_Loaded(object sender, RoutedEventArgs e)

@@ -37,8 +37,15 @@ namespace Zad5
 				SklepContext.Produkty.AddRange(p1, p2, p3);
 
 				var kl1 = new Klient() { Nazwa = "Grzegorz Duraj", Adres = "ul. Przykladowa 11 Bielsko-Biała", NIP = 0000000001 };
+				var kl2 = new Klient() { Nazwa = "Jan Kowalski", Adres = "ul. Przykladowa 11 Bielsko-Biała", NIP = 0000000002 };
 
-				SklepContext.Klienci.Add(kl1);
+				SklepContext.Klienci.AddRange(kl1, kl2);
+
+				var z1 = new Zamowienia() { Klient = kl1, StatusZamowienia = StatusZamowienia.Rozpoczete, DataRozpoczecia = DateTime.Now };
+				var z2 = new Zamowienia() { Klient = kl2, StatusZamowienia = StatusZamowienia.WRealizacji, DataRozpoczecia = DateTime.Now.AddDays(2) };
+				var z3 = new Zamowienia() { Klient = kl1, StatusZamowienia = StatusZamowienia.Zakoczone, DataRozpoczecia = DateTime.Now.AddDays(10) };
+
+				SklepContext.Zamowienia.AddRange(z1, z2, z3);
 
 				SklepContext.SaveChanges();
 			}

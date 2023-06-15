@@ -30,8 +30,8 @@ namespace Zad5
 			var kategorie = new Kategorie();
 			var zamowienia = new Zamowienia();
 
-			tabControl.Items.Add(kategorie);
 			tabControl.Items.Add(zamowienia);
+			tabControl.Items.Add(kategorie);
 			tabControl.Items.Add(produkty);
 
 		}

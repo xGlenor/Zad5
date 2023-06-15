@@ -67,4 +67,48 @@
         </StackPanel>
     </DataTemplate>
 
+    <DataTemplate x:Key="OrderTemplate">
+        <StackPanel Orientation="Vertical">
+            <Border Padding="10 10"
+                    MinWidth="150"
+                    BorderBrush="{StaticResource BackgroundColor}"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:" Width="70"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=ZamowienieId}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Rozpoczęto:" Width="100"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=DataRozpoczecia}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Zakończono:" Width="100"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=DataZakonczenia}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Status:" Width="100"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=StatusZamowienia}"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Cena:" Width="100"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=KwotaZamowienia}"/>
+
+                    <Button x:Name="btnFinishOrder_Click" Grid.Row="5" Margin="0 3" Grid.ColumnSpan="2" Content="Lista Produktów"/>
+                    <Button Grid.Row="6" Margin="0 3" Grid.ColumnSpan="2" Content="Zakończ"/>
+
+                </Grid>
+            </Border>
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>

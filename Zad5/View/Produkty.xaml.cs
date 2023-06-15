@@ -51,18 +51,9 @@ namespace Zad5.View
 
 		private void btnAddProduct_Click(object sender, RoutedEventArgs e)
 		{
+			AddProduct addProduct = new AddProduct();
+			addProduct.Show();
 
-			sklepContext.Produkty.Add(new Produkt()
-			{
-				Nazwa = tbox_ProductName.Text,
-				KategoriaProduktuId = sklepContext.KategoriaProduktu.Single(
-					c => c.Name.Equals((string) combo_ProductCategory.SelectedValue)).ProduktKategoriaId,
-				IloscNaStanie = int.Parse(tbox_ProductIlosc.Text),
-				CenaJednostkowa = double.Parse(tbox_ProductCena.Text)
-			});
-
-			sklepContext.SaveChanges();
-			listView.Items.Refresh();
 		}
 	
 		private void btn_ProductDelete_Click(object sender, RoutedEventArgs e)

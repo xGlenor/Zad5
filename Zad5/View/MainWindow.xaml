@@ -18,11 +18,7 @@
                 HorizontalAlignment="Center">
 
             <TabControl Height="600" Width="950" Style="{DynamicResource TabControlStyle}" Name="tabControl">
-                <TabItem Header="Strona Główna" Style="{DynamicResource TabItemStyle}">
-                    <Border>
 
-                    </Border>
-                </TabItem>
             </TabControl>
 
 

@@ -14,74 +14,32 @@
         <CollectionViewSource x:Key="ProductSource"/>
     </TabItem.Resources>
     <Grid>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0 0 0 10">
+        <!--//
+            //
+            // EDYCJA PRODUKTU
+            //
+            //-->
+
+        <StackPanel Grid.Row="0" Margin="0 10 0 10">
             <WrapPanel>
-                <TextBlock
-                    Text="Dodaj produkt"
-                    Foreground="{StaticResource PrimaryBlueColor}"
-                    FontSize="20"/>
-            </WrapPanel>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <!-- NAZWA PRODUKTU -->
-            <WrapPanel Margin="5 0">
-                <TextBlock Text="Nazwa: " FontSize="15" Height="30" Width="60" Foreground="#333333" />
-                <TextBox Width="150"
-                         TextWrapping="Wrap" 
-                         x:Name="tbox_ProductName"
-                         Foreground="#333333"
-                         BorderThickness="0 0 0 2"
-                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
-            </WrapPanel>
-            <!-- STAN MAGAZYNOWY -->
-            <WrapPanel Margin="5 0">
-                <TextBlock Text="Ilosć: " FontSize="15" Height="30" Width="45" Foreground="#333333" />
-                <TextBox Width="70"
-                         TextWrapping="Wrap" 
-                         x:Name="tbox_ProductIlosc"
-                         Foreground="#333333"
-                         BorderThickness="0 0 0 2"
-                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
-            </WrapPanel>
-            <!-- CenaJednostkowa -->
-            <WrapPanel Margin="5 0">
-                <TextBlock Text="Cena: " FontSize="15" Height="30" Width="50" Foreground="#333333" />
-                <TextBox Width="50"
-                         TextWrapping="Wrap" 
-                         x:Name="tbox_ProductCena"
-                         Foreground="#333333"
-                         BorderThickness="0 0 0 2"
-                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
-            </WrapPanel>
-            <!-- Kategoria -->
-            <WrapPanel Margin="5 0">
-                <TextBlock Text="Kategoria: " FontSize="15" Height="30" Width="80" Foreground="#333333" />
-                <ComboBox x:Name="combo_ProductCategory" 
-                          MinWidth="150"
-                          ItemsSource="{Binding Source={StaticResource CategoryListSource}}" 
-                          SelectedIndex="0"
-                          Foreground="{StaticResource PrimaryBlueColor}" 
-                          BorderBrush="Transparent"/>
-            </WrapPanel>
-            <WrapPanel Margin="20 0 0 0">
-                <Button Width="100"
+                <Button MinWidth="100" 
+                        Padding="10 0 10 0"
                             Height="40"
-                            Content="DODAJ"
+                            Content="DODAJ PRODUKT"
                             Background="{StaticResource PrimaryBlueColor}"
                             Foreground="{StaticResource PrimaryTextColor}"
                             FontWeight="Bold"
                             FontSize="15"
-                            Click="btnAddProduct_Click"
                             BorderThickness="0"
-                            >
+                            Click="btnAddProduct_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="20"/>
@@ -90,27 +48,22 @@
                 </Button>
             </WrapPanel>
         </StackPanel>
-
-        <!--//
-            //
-            // EDYCJA PRODUKTU
-            //
-            //-->
         
-        <StackPanel Grid.Row="2" Margin="0 10 0 10">
+        <StackPanel Grid.Row="1" Margin="0 10 0 10">
             <WrapPanel>
                 <TextBlock
                     Text="Edytuj Produkt"
                     Foreground="{StaticResource PrimaryBlueColor}"
                     FontSize="20"/>
             </WrapPanel>
+
         </StackPanel>
         
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <!-- ID PRODUKTU -->
             <WrapPanel Margin="5 0">
                 <TextBlock Text="ID: " FontSize="15" Height="30" Width="30" Foreground="#333333" />
-                <TextBlock Width="60"
+                <TextBlock Width="50"
                          FontSize="15"
                          TextWrapping="Wrap" 
                          x:Name="tbox_EditProductID"
@@ -153,13 +106,14 @@
             <!-- Kategoria -->
             <WrapPanel Margin="5 0">
                 <TextBlock Text="Kategoria: " FontSize="15" Height="30" Width="80" Foreground="#333333" />
-                <ComboBox x:Name="cbox_EditProductCategory" 
-                          MinWidth="150"
-                          ItemsSource="{Binding Source={StaticResource CategoryListSource}}"
-                          SelectedItem="{Binding ElementName=listView, Path=SelectedItem.ProduktKategoria.Name}"
-                          SelectedIndex="0"
-                          Foreground="{StaticResource PrimaryBlueColor}" 
-                          BorderBrush="Transparent"/>
+                <TextBox Width="100"
+                         TextWrapping="Wrap" 
+                         x:Name="tbox_Category"
+                         Foreground="#333333"
+                         Text="{Binding ElementName=listView, Path=SelectedItem.ProduktKategoria.Name}"
+                         BorderThickness="0 0 0 2"
+                         BorderBrush="{StaticResource PrimaryBlueColor}"/>
+                
             </WrapPanel>
             <WrapPanel Margin="20 0 0 0">
                 <Button Width="100"
@@ -179,9 +133,8 @@
                 </Button>
             </WrapPanel>
         </StackPanel>
-        
 
-        <ListBox Grid.Row="5"
+        <ListBox Grid.Row="3"
                   ItemsSource="{Binding Source={StaticResource ProductSource}}"
                   x:Name="listView" 
                   Foreground="#333333"
